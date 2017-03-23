@@ -112,6 +112,9 @@ namespace :check do
         host[:labels] and host[:labels].include? 'localhost_only'
       end
     end
+    hosts.delete_if do |hostname, host|
+      hostname.start_with? 'template:'
+    end
     task all: hosts.keys.map { |h| h }
     hosts.each do |hostname, host|
       desc "Run serverspec to host #{hostname}"

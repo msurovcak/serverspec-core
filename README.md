@@ -24,6 +24,24 @@ file named `hosts.yml`.
       :labels:
         - na
 
+It is also possible and supported to use YAML anchors in `hosts.yaml`:
+
+    template:dev: &dev
+      :roles:
+        - compute
+        - dev
+      :labels:
+        - na
+
+    dev-cmp04.int.na.getgooddata.com:
+      <<: *dev
+
+    dev-cmp05.int.na.getgooddata.com:
+      <<: *dev
+
+The template name has to start with a `template:` string, this can help you
+to stay DRY.
+
 To install the dependencies, use `bundle install`.
 
 You can then run a test session:
